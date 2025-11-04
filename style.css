@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    background: darkgray;
+}
+
+#canvas {
+    background: lightgray;
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+}
