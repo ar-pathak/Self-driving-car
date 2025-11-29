@@ -1,14 +1,14 @@
 const canvas = document.getElementById('canvas');
-canvas.style.height = window.innerHeight + 'px';
+canvas.width = 200;
+canvas.height = window.innerHeight;
 
 const ctx = canvas.getContext('2d');
-const road = new Road(canvas.width / 2, canvas.width * .9);
-const car = new Car(road.getLaneCenter(1), 100, 30, 50);// Create a new car instance 100 x ,100 y , 30 width , 50 height
-car.draw(ctx);
+const road = new Road(canvas.width / 2, canvas.width * 0.9);
+const car = new Car(road.getLaneCenter(1), 100, 30, 50);
 
-animate();
 function animate() {
     canvas.height = window.innerHeight;
+
     car.update(road.borders);
 
     ctx.save();
@@ -20,3 +20,5 @@ function animate() {
     ctx.restore();
     requestAnimationFrame(animate);
 }
+
+animate();

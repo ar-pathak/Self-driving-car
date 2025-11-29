@@ -9,6 +9,13 @@
 </head>
 
 <body>
+    <div id="controls">
+        <h3>Controls</h3>
+        <p>⬆️ Forward</p>
+        <p>⬇️ Reverse</p>
+        <p>⬅️ Left</p>
+        <p>➡️ Right</p>
+    </div>
     <canvas id="canvas"></canvas>
     <script src="./utils.js"></script>
     <script src="./sensor.js"></script>
@@ -16,6 +23,12 @@
     <script src="./controls.js"></script>
     <script src="./car.js"></script>
     <script src="./main.js"></script>
+    
+    <script>
+        window.addEventListener('resize', () => {
+            canvas.height = window.innerHeight;
+        });
+    </script>
 
 </body>
 
