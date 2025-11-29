@@ -16,6 +16,11 @@
         <p>⬅️ Left</p>
         <p>➡️ Right</p>
     </div>
+    <div id="status">
+        <h3>Status</h3>
+        <p id="statusText" class="status-ok">✓ Operational</p>
+        <p id="speed">Speed: 0.0</p>
+    </div>
     <canvas id="canvas"></canvas>
     <script src="./utils.js"></script>
     <script src="./sensor.js"></script>
@@ -23,7 +28,7 @@
     <script src="./controls.js"></script>
     <script src="./car.js"></script>
     <script src="./main.js"></script>
-    
+
     <script>
         window.addEventListener('resize', () => {
             canvas.height = window.innerHeight;

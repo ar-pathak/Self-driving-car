@@ -18,6 +18,21 @@ function animate() {
     car.draw(ctx);
 
     ctx.restore();
+
+    // Update status display
+    const statusText = document.getElementById('statusText');
+    const speedText = document.getElementById('speed');
+
+    if (car.damaged) {
+        statusText.textContent = '✗ CRASHED!';
+        statusText.className = 'status-crashed';
+    } else {
+        statusText.textContent = '✓ Operational';
+        statusText.className = 'status-ok';
+    }
+
+    speedText.textContent = `Speed: ${Math.abs(car.speed).toFixed(2)}`;
+
     requestAnimationFrame(animate);
 }
 

@@ -14,12 +14,25 @@ class Car {
         this.sensor = new Sensor(this);
         this.control = new Controls();
         this.polygon = [];
+        this.damaged = false;
     }
 
     update(roadBorders) {
-        this.move();
-        this.polygon = this.createPolygon();
+        if (!this.damaged) {
+            this.move();
+            this.polygon = this.createPolygon();
+            this.damaged = this.assessDamage(roadBorders);
+        }
         this.sensor.update(roadBorders);
+    }
+
+    assessDamage(roadBorders) {
+        for (let i = 0; i < roadBorders.length; i++) {
+            if (polysIntersect(this.polygon, [roadBorders[i][0], roadBorders[i][1]])) {
+                return true;
+            }
+        }
+        return false;
     }
 
     createPolygon() {
@@ -87,7 +100,12 @@ class Car {
     }
 
     draw(ctx) {
-        ctx.fillStyle = "blue";
+        if (this.damaged) {
+            ctx.fillStyle = "gray";
+        } else {
+            ctx.fillStyle = "blue";
+        }
+
         ctx.beginPath();
         ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
         for (let i = 1; i < this.polygon.length; i++) {
@@ -95,6 +113,23 @@ class Car {
         }
         ctx.closePath();
         ctx.fill();
+
+        if (this.damaged) {
+            // Draw damage effect
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Draw X over damaged car
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
+            ctx.lineTo(this.polygon[2].x, this.polygon[2].y);
+            ctx.moveTo(this.polygon[1].x, this.polygon[1].y);
+            ctx.lineTo(this.polygon[3].x, this.polygon[3].y);
+            ctx.stroke();
+        }
 
         this.sensor.draw(ctx);
     }
